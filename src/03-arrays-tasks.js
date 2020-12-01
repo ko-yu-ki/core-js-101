@@ -125,7 +125,7 @@ function removeFalsyValues(arr) {
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
 function getUpperCaseStrings(arr) {
-  return arr.map((elem) => elem.toUppercase);
+  return arr.map((elem) => elem.toUpperCase());
 }
 
 /**
@@ -154,8 +154,8 @@ function getStringsLength(arr) {
  *    [ 1, 3, 4, 5 ], 2, 1  => [ 1, 2, 3, 4, 5 ]
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
-function insertItem(/* arr, item, index */) {
-  throw new Error('Not implemented');
+function insertItem(arr, item, index) {
+  return arr.splice(index, 0, item);
 }
 
 /**
@@ -446,8 +446,20 @@ function sortCitiesArray(/* arr */) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const arr = [];
+  for (let i = 0; i < n; i += 1) {
+    const arr1 = [];
+    for (let j = 0; j < n; j += 1) {
+      if (i === j) {
+        arr1.push(1);
+      } else {
+        arr1.push(0);
+      }
+    }
+    arr.push(arr1);
+  }
+  return arr;
 }
 
 /**
@@ -463,8 +475,16 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const arr = [];
+  let i = start;
+  let j = 0;
+  while (j <= end - start) {
+    arr.push(i);
+    i += 1;
+    j += 1;
+  }
+  return arr;
 }
 
 /**
@@ -478,8 +498,15 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const arr1 = [];
+  arr.filter((elem) => {
+    if (!arr1.includes(elem)) {
+      arr1.push(elem);
+    }
+    return arr1;
+  });
+  return arr1;
 }
 
 /**
