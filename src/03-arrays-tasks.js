@@ -239,8 +239,15 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  const arr1 = arr.slice();
+  return arr.map((elem, index) => {
+    if (index >= 1) {
+      arr1[index] += arr1[index - 1];
+      return arr1[index];
+    }
+    return elem;
+  });
 }
 
 /**
@@ -556,8 +563,8 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.map((x) => childrenSelector(x)).flat(1);
 }
 
 /**
@@ -572,8 +579,12 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  if (indexes.length !== 1) {
+    const currInd = indexes.shift();
+    getElementByIndexes(arr[currInd], indexes);
+  }
+  return arr[indexes];
 }
 
 /**
@@ -594,8 +605,15 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const mid = (arr.length - (arr.length % 2)) / 2;
+  const head = arr.slice().splice(0, mid);
+  if (arr.length % 2 === 0) {
+    const tail = arr.slice().splice(mid);
+    return tail.concat(head);
+  }
+  const tail = arr.slice().splice(mid + 1);
+  return tail.concat(arr[mid]).concat(head);
 }
 
 module.exports = {
