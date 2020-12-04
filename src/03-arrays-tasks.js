@@ -56,11 +56,13 @@ function generateOdds(len) {
  */
 function doubleArray(arr) {
   if (arr.length === 0) return arr;
-  const len = arr.length;
-  for (let i = 0; i < len; i += 1) {
-    arr.push(arr[i]);
-  }
-  return arr;
+  // const len = arr.length;
+  // for (let i = 0; i < len; i += 1) {
+  //   arr.push(arr[i]);
+  // }
+  // return arr;
+  const res = arr.concat(arr);
+  return res;
 }
 
 /**
@@ -313,8 +315,8 @@ function get3TopItems(/* arr */) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getPositivesCount(arr) {
+  return arr.filter((elem) => (elem > 0) && (typeof elem === 'number')).length;
 }
 
 /**
@@ -466,7 +468,7 @@ function getIdentityMatrix(n) {
     }
     arr.push(arr1);
   }
-  return arr;
+  return arr;git 
 }
 
 /**
