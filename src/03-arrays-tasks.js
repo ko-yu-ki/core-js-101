@@ -468,7 +468,7 @@ function getIdentityMatrix(n) {
     }
     arr.push(arr1);
   }
-  return arr;git 
+  return arr;
 }
 
 /**
