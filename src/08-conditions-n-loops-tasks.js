@@ -286,8 +286,24 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  let res = false;
+  let accum = 0;
+  const arr = ccn.toString().split('').reverse();
+  for (let i = 0; i < arr.length; i += 1) {
+    if (!(i % 2)) {
+      accum += +arr[i];
+    } else {
+      const buffer = arr[i] * 2;
+      if (buffer < 10) {
+        accum += buffer;
+      } else {
+        accum += (buffer % 10) + 1;
+      }
+    }
+  }
+  if (accum % 10 === 0) { res = true; }
+  return res;
 }
 
 /**
@@ -335,8 +351,27 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  if (str === '') return true;
+  let res = false;
+  const opB = ['{', '[', '(', '<'];
+  const clB = ['}', ']', ')', '>'];
+  if (clB.indexOf(str[0]) > -1) return res;
+  const buff = [];
+  buff.push(str[0]);
+  for (let i = 1; i < str.length; i += 1) {
+    if (opB.indexOf(str[i]) > -1) {
+      buff.push(str[i]);
+    }
+    if (clB.indexOf(str[i]) > -1
+      && clB.indexOf(str[i]) !== opB.indexOf(buff[buff.length - 1])) {
+      buff.push(str[i]);
+    } else if (clB.indexOf(str[i]) > -1) {
+      buff.pop();
+    }
+  }
+  if (buff.length === 0) { res = true; }
+  return res;
 }
 
 /**
