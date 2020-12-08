@@ -123,26 +123,31 @@ function isTriangle(a, b, c) {
  *
  */
 function doRectanglesOverlap(rect1, rect2) {
-  // console.log(rect1, rect2);
-  let res = false;
-  if (rect2.left <= rect1.left + rect1.width && rect2.top <= rect1.top + rect1.height) {
-    // console.log('1');
-    res = true;
+  // (a,b), w1, h1 & (c,d), w2, h2
+  const a = rect1.left;
+  const b = rect1.top;
+  const c = rect2.left;
+  const d = rect2.top;
+  const w1 = rect1.width;
+  const h1 = rect1.height;
+  const w2 = rect2.width;
+  const h2 = rect2.height;
+  let res = true;
+  // if (c >= a && c <= a + w1) {
+  //   if ((d >= b && b <= b + h1) || (d + h2 >= b && d + h2 <= b + h1)) {
+  //     res = true;
+  //   }
+  // }
+  // if (c + w2 >= a && c + w2 <= a + w1) {
+  //   if ((d >= b && d <= b + h1) || (d + h2 >= b && d + h2 <= b + h1)) {
+  //     res = true;
+  //   }
+  // }
+  // от обратного. просто разобрать случай, когда точно не пересекаются
+  if (a > c + w2 || a + w1 < c || b > d + h2 || b + h1 < d) {
+    res = false;
   }
-  if (rect2.left + rect2.height <= rect1.left + rect1.width
-    && rect2.top + rect2.height <= rect1.top + rect1.width) {
-    // console.log('2');
-    res = true;
-  }
-  if (rect1.left <= rect2.left + rect2.width && rect1.top <= rect2.top + rect2.height) {
-    // console.log('3');
-    res = true;
-  }
-  if (rect1.left + rect1.height <= rect2.left
-    && rect1.top <= rect2.top + rect2.width) {
-    // console.log('4');
-    res = true;
-  }
+
   return res;
 }
 
@@ -172,8 +177,17 @@ function doRectanglesOverlap(rect1, rect2) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const a = circle.center.x;
+  const b = circle.center.y;
+  const r = circle.radius;
+  const c = point.x;
+  const d = point.y;
+  let res = false;
+  if ((b - d) ** 2 + (a - c) ** 2 < r ** 2) {
+    res = true;
+  }
+  return res;
 }
 
 /**
