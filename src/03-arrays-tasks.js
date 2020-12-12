@@ -443,13 +443,23 @@ function toStringList(arr) {
  *    ]
  */
 function sortCitiesArray(arr) {
-  const res = arr.slice();
-  res.sort((a, b) => {
-    if (a.country === b.country) { return a.city > b.city; }
-    return a.country > b.country;
+  return arr.sort((a, b) => {
+    if (a.country > b.country) { return 1; }
+    if (a.country < b.country) { return -1; }
+    if (a.country === b.country) {
+      if (a.city > b.city) { return 1; }
+      if (a.city < b.city) { return -1; }
+    }
+    return 0;
   });
-  console.log(res);
-  return res;
+
+  // а вот так работает в Лисе и песочнице онлайн
+  // function sortCitiesArray(arr) {
+  //   return arr.sort((a, b) => {
+  //     if (a.country !== b.country) { return a.country > b.country; }
+  //     return a.city > b.city;
+  //   });
+  // }
 }
 
 /**
